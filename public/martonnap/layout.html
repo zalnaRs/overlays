@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puskás Stúdió</title>
+
+    <link rel="stylesheet" href="/assets/css/main.css" />
+
+    <style>
+      @keyframes minBar {
+        from {
+          width: var(--screen-width);
+        }
+        to {
+          width: 380px;
+        }
+      }
+    </style>
+  </head>
+  <body class="h-16">
+    <nav
+      style="
+        width: var(--screen-width);
+        transition: all 0.1s var(--ease-in-out-expo);
+      "
+      class="flex justify-between items-center"
+    >
+      <div
+        id="top-bar"
+        class="m-4 flex justify-between items-center px-4 shadow bg-zinc-200/15 backdrop-blur text-black rounded"
+        style="transition: all 0.1s var(--ease-in-out-expo)"
+      >
+        <div class="flex items-center flex-1">
+          <h1
+            style="
+              width: 300px;
+              transition: all 0.1s var(--ease-in-out-expo);
+              text-align: center;
+            "
+          >
+            Puskás Libagaliga
+          </h1>
+        </div>
+      </div>
+      <div
+        class="m-4 flex justify-between items-center px-4 shadow bg-zinc-200/15 backdrop-blur text-black rounded"
+      >
+        <span
+          id="digital-clock"
+          style="font-size: 24px; transition: all 0.1s var(--ease-in-out-expo)"
+        ></span>
+      </div>
+    </nav>
+
+    <!-- <main> -->
+    <!--   <iframe -->
+    <!--     id="embed-slot" -->
+    <!--     frameborder="0" -->
+    <!--     class="fixed top-0 left-0 w-screen h-screen" -->
+    <!--   ></iframe> -->
+    <!-- </main> -->
+    <!---->
+    <script src="/assets/js/main.js" defer type="module"></script>
+
+    <script>
+      window.addEventListener("load", () => {
+        handlesForNotifications["minBar"] = () => {
+          const nav = document.querySelector("nav");
+          nav.style.animation = "none";
+          void nav.offsetWidth; // Trigger reflow
+          nav.style.animation =
+            "minBar 1000ms var(--ease-in-out-expo) forwards";
+          setTimeout(() => {
+            document.querySelector("#digital-clock").style.opacity = "0";
+            document.querySelector("nav #top-bar").style.justifyContent =
+              "center";
+          }, 200);
+          setTimeout(
+            () =>
+              (document.querySelector("#digital-clock").style.display = "none"),
+            500,
+          );
+        };
+        handlesForNotifications["maxBar"] = () => {
+          const nav = document.querySelector("nav");
+          nav.style.animation = "none";
+          void nav.offsetWidth; // Trigger reflow
+          nav.style.animation =
+            "minBar 1000ms var(--ease-in-out-expo) forwards reverse";
+          setTimeout(() => {
+            document.querySelector("#digital-clock").style.display = "flex";
+            document.querySelector("nav #top-bar").style.justifyContent =
+              "space-between";
+          }, 500);
+          setTimeout(
+            () =>
+              (document.querySelector("#digital-clock").style.opacity = "1"),
+            800,
+          );
+        };
+      });
+    </script>
+  </body>
+</html>

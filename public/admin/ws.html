@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Elysia WebSocket Control Client</title>
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        background: #121212;
+        color: #e0e0e0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        padding: 1rem;
+      }
+      h1 {
+        margin-bottom: 1rem;
+      }
+      #buttons {
+        display: flex;
+        gap: 1rem;
+      }
+      button {
+        background: #1e88e5;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+      }
+      button:hover {
+        background: #42a5f5;
+      }
+      #log {
+        margin-top: 2rem;
+        padding: 1rem;
+        width: 80%;
+        max-width: 600px;
+        height: 200px;
+        overflow-y: auto;
+        background: #1f1f1f;
+        border-radius: 6px;
+        font-family: monospace;
+        font-size: 0.9rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🦊 Elysia WebSocket Control Client</h1>
+
+    <div id="buttons"></div>
+
+    <div id="log"></div>
+
+    <script>
+      // Define commands as an object: key = command, value = button label
+      const commands = {
+        reload: "🔄 Reload",
+        minBar: "➖ Min Bar",
+        maxBar: "➕ Max Bar",
+        // add more if you want!
+        // shutdown: "⏻ Shutdown"
+      };
+
+      const buttonsContainer = document.getElementById("buttons");
+      const log = (msg) => {
+        const el = document.createElement("div");
+        el.textContent = msg;
+        document.getElementById("log").appendChild(el);
+        console.log(msg);
+      };
+
+      // Create buttons dynamically based on commands object
+      Object.entries(commands).forEach(([command, label]) => {
+        const btn = document.createElement("button");
+        btn.textContent = label;
+        btn.onclick = () => sendControl(command);
+        buttonsContainer.appendChild(btn);
+      });
+
+      // Connect to WebSocket server
+      const socket = new WebSocket("ws://127.0.0.1:3000/api/ws");
+
+      socket.onopen = () => {
+        log("✅ Connected to ws://127.0.0.1:3000/api/ws");
+      };
+
+      socket.onmessage = (event) => {
+        try {
+          const data = JSON.parse(event.data);
+          log(`📩 Received: ${JSON.stringify(data)}`);
+        } catch {
+          log(`📩 Received (raw): ${event.data}`);
+        }
+      };
+
+      socket.onerror = (err) => {
+        log(`⚠️ WebSocket error: ${JSON.stringify(err)}`);
+      };
+
+      socket.onclose = () => {
+        log("❌ Connection closed");
+      };
+
+      // Send control messages to server
+      function sendControl(command) {
+        if (socket.readyState !== WebSocket.OPEN) {
+          return log("⚠️ WebSocket not connected");
+        }
+
+        const payload = {
+          type: "control",
+          message: command,
+        };
+
+        socket.send(JSON.stringify(payload));
+        log(`➡️ Sent: ${JSON.stringify(payload)}`);
+      }
+    </script>
+  </body>
+</html>
