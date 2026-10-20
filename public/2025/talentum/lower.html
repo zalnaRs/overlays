@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Szalagavató waiting</title>
+
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <style>
+      main {
+        transition:
+          opacity 1s cubic-bezier(0.87, 0, 0.13, 1),
+          transfrom 0.4s ease-in-out;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main
+      style="
+        background: url(/talentum/bg-fast.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        font-family: &quot;Montserrat&quot;;
+        opacity: 0;
+      "
+      class="bg-white text-white fixed m-12 bottom-0 left-0 flex gap-[2%] w-96 h-24 rounded shadow-md"
+    >
+      <div
+        style="background: transparent; object-fit: fill; flex: 1"
+        class="text-white flex justify-center px-4 flex-col"
+      >
+        <h1 id="a" class="text-4xl"></h1>
+        <h2 id="b" class="text-2xl"></h2>
+      </div>
+    </main>
+
+    <script src="/assets/js/main.js" defer></script>
+    <!-- <script> -->
+    <!--   const headerFirst = document.querySelector("header h2"); -->
+    <!--   const headerSecond = document.querySelector("header h1"); -->
+    <!---->
+    <!--   const pairs = [ -->
+    <!--     [ -->
+    <!--       "BMSZC Puskás Tivadar Távközlési és Informatikai Technikum", -->
+    <!--       "Tálentum hét", -->
+    <!--     ], -->
+    <!--     ["Toth Zalán Csaba", "Legalja cucc"], -->
+    <!--   ]; -->
+    <!---->
+    <!--   let index = 0; -->
+    <!---->
+    <!--   function showNext() { -->
+    <!--     const [l1, l2] = pairs[index]; -->
+    <!---->
+    <!--     headerFirst.style.opacity = "0"; -->
+    <!--     headerSecond.style.opacity = "0"; -->
+    <!---->
+    <!--     setTimeout(() => { -->
+    <!--       headerFirst.innerHTML = l1; -->
+    <!--       headerSecond.innerHTML = l2; -->
+    <!--       headerFirst.style.opacity = "1"; -->
+    <!--       headerSecond.style.opacity = "1"; -->
+    <!--     }, 800); -->
+    <!---->
+    <!--     index = (index + 1) % pairs.length; -->
+    <!--   } -->
+    <!---->
+    <!--   // start -->
+    <!--   showNext(); -->
+    <!--   setInterval(showNext, 6000); // every 6 seconds -->
+    <!-- </script> -->
+    <script>
+      const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+      const paramssss = new URLSearchParams(location.search);
+
+      document.querySelector("#a").innerHTML = paramssss.get("2");
+      document.querySelector("#b").innerHTML = paramssss.get("1");
+
+      window.onload = () => {
+        setTimeout(
+          () => (document.querySelector("main").style.opacity = "1"),
+          1,
+        );
+        // setTimeout(
+        //   () => (document.querySelector("main").style.opacity = "0"),
+        //   4001,
+        // );
+      };
+    </script>
+    <!-- <script> -->
+    <!--   const header_first = document.querySelector("header h2"); -->
+    <!--   const header_second = document.querySelector("header h1"); -->
+    <!--   const delay = async (delay) => -->
+    <!--     await new Promise((resolve, reject) => -->
+    <!--       setTimeout(() => resolve(), delay), -->
+    <!--     ); -->
+    <!---->
+    <!--   async function cycle() { -->
+    <!--     console.log("1"); -->
+    <!--     header_first.style.opacity = "1"; -->
+    <!--     header_second.style.opacity = "1"; -->
+    <!--     header_first.innerHTML = -->
+    <!--       "BMSZC Puskás Tivadar Távközlési és Informatikai Technikum"; -->
+    <!--     header_second.innerHTML = "Tálentum hét"; -->
+    <!--     await delay(5000); -->
+    <!--     console.log("2"); -->
+    <!--     header_first.style.opacity = "0"; -->
+    <!--     header_second.style.opacity = "0"; -->
+    <!--     await delay(100); -->
+    <!--     console.log("3"); -->
+    <!--     header_first.innerHTML = "Toth Zalán Csaba"; -->
+    <!--     header_second.innerHTML = "Legalja cucc"; -->
+    <!--     header_first.style.opacity = "1"; -->
+    <!--     header_second.style.opacity = "1"; -->
+    <!--     await delay(5000); -->
+    <!--     console.log("4"); -->
+    <!--     header_first.style.opacity = "0"; -->
+    <!--     header_second.style.opacity = "0"; -->
+    <!--     await delay(5000); -->
+    <!--   } -->
+    <!--   cycle(); -->
+    <!-- </script> -->
+  </body>
+</html>

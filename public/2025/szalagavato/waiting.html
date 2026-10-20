@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="hu">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Szalagavató waiting</title>
+
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+
+  <body>
+    <main class="screen-center flex-col">
+      <img class="w-96 mb-4" src="/assets/img/logo-transparent.png" alt="" />
+      <span id="puskas-title">{{ puskas_3 }}</span>
+      <h2 class="text-4xl/12 mt-4">Ballagás 2026</h2>
+    </main>
+    <footer
+      class="fixed top-0 right-0 m-2 bg-zinc-50/25 p-2 px-4 text-3xl flex justify-center items-center backdrop-blur-md rounded-md shadow"
+    >
+      <span id="digital-clock"></span>
+    </footer>
+
+    <script src="/assets/js/main.js" defer></script>
+
+    <style>
+      html,
+      body {
+        background:
+          radial-gradient(
+            100% 100% at var(--9-x-position) var(--9-y-position),
+            #ba660720 -100%,
+            transparent
+          ),
+          radial-gradient(
+            100% 100% at var(--10-x-position) var(--10-y-position),
+            #1e70ce40 -100%,
+            transparent
+          ),
+          radial-gradient(
+            100% 100% at var(--11-x-position) var(--11-y-position),
+            #d11a6c10 -100%,
+            transparent
+          ),
+          radial-gradient(
+            100% 100% at var(--12-x-position) var(--12-y-position),
+            #ef1f0315 -100%,
+            transparent
+          ),
+          radial-gradient(
+            100% 100% at var(--13-x-position) var(--13-y-position),
+            #44a00b40 -100%,
+            transparent
+          ),
+          #ffffff;
+        animation-name: main;
+        animation-iteration-count: infinite;
+        animation-duration: 30s;
+        transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
+      }
+
+      @property --9-x-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 20%;
+      }
+
+      @property --9-y-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 80%;
+      }
+
+      @property --10-x-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 80%;
+      }
+
+      @property --10-y-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 20%;
+      }
+
+      @property --11-x-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 80%;
+      }
+
+      @property --11-y-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 80%;
+      }
+
+      @property --12-x-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 80%;
+      }
+
+      @property --12-y-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 80%;
+      }
+
+      @property --13-x-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 80%;
+      }
+
+      @property --13-y-position {
+        syntax: "<percentage>";
+        inherits: false;
+        initial-value: 80%;
+      }
+
+      :root {
+        --4-x-position: 20%;
+        --4-y-position: 80%;
+        --5-x-position: 80%;
+        --5-y-position: 20%;
+        --9-x-position: 20%;
+        --9-y-position: 80%;
+        --10-x-position: 80%;
+        --10-y-position: 20%;
+        --11-x-position: 80%;
+        --11-y-position: 80%;
+        --12-x-position: 80%;
+        --12-y-position: 80%;
+        --13-x-position: 80%;
+        --13-y-position: 80%;
+      }
+
+      @keyframes main {
+        25% {
+          --9-x-position: 15%;
+          --9-y-position: 15%;
+          --10-x-position: 85%;
+          --10-y-position: 80%;
+        }
+
+        50% {
+          --9-x-position: 80%;
+          --9-y-position: 15%;
+          --10-x-position: 15%;
+          --10-y-position: 85%;
+          --11-x-position: 20%;
+          --11-y-position: 20%;
+          --12-x-position: 20%;
+          --12-y-position: 20%;
+          --13-x-position: 20%;
+          --13-y-position: 20%;
+        }
+      }
+    </style>
+  </body>
+</html>

@@ -54,7 +54,7 @@ const initClocks = () => {
     setInterval(() => {
       const now = new Date();
 
-      simpleClocks.forEach((clock) => {
+      document.querySelectorAll("#clock").forEach((clock) => {
         clock.innerHTML = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`;
       });
     }, 1000);

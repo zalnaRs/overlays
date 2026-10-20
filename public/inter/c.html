@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="hu">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Szalagavató waiting</title>
+
+    <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+<body class="bg-transparent">
+    <main class="w-full h-full mx-14 my-8 flex flex-col gap-1">
+        <h2 id="a" class="text-shadow-lg text-xl mix-blend-screen text-white">
+        </h2>
+        <h1 id="b" class="text-shadow-lg text-2xl mix-blend-screen text-white">
+        </h1>
+    </main>
+
+    <script src="/assets/js/main.js" defer></script>
+    <!--     <script>
+        window.addEventListener("load", () => {
+            const schoolA = "Budapesti Műszaki Szakképzési Centrum";
+            const schoolB = "Puskás Tivadar Távközlési és Informatikai Technikum";
+            const params = new URLSearchParams(window.location.search);
+            const paramsA = params.get("a");
+            const paramsB = params.get("b");
+
+            let i = 0;
+
+            const updateText = () => {
+                const a = document.querySelector("#a");
+                const b = document.querySelector("#b");
+                a.innerHTML = i === 0 ? schoolA : paramsA || schoolA;
+                b.innerHTML = i === 0 ? schoolB : paramsB || schoolB;
+            }
+            updateText()
+            const flicker = async () => {
+                const a = document.querySelector("#a");
+                const b = document.querySelector("#b");
+                i = (i + 1) % 2;
+
+
+                a.classList.remove("fade-in-blur", "fade-out-blur");
+                b.classList.remove("fade-in-blur", "fade-out-blur");
+
+                await window.delay(2200);
+                a.classList.add("fade-out-blur");
+                b.classList.add("fade-out-blur");
+
+                await window.delay(2200);
+                updateText();
+                a.classList.remove("fade-out-blur");
+                b.classList.remove("fade-out-blur");
+                a.classList.add("fade-in-blur");
+                b.classList.add("fade-in-blur");
+
+                await window.delay(2200);
+
+            };
+
+            setInterval(flicker, 12000);
+        });
+    </script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        window.addEventListener("load", () => {
+            const schoolA = "Budapesti Műszaki Szakképzési Centrum";
+            const schoolB = "Puskás Tivadar Távközlési és Informatikai Technikum";
+            const params = new URLSearchParams(window.location.search);
+            const paramsA = params.get("b");
+            const paramsB = params.get("a"); // this is swapped for obvious reasons
+
+            let i = 0;
+
+            function swap() {
+                const a = document.querySelector("#a");
+                const b = document.querySelector("#b");
+                if (!a || !b) return;
+
+                i = (i + 1) % 2;
+
+                gsap.timeline()
+                    .to([a, b], {
+                        opacity: 0,
+                        filter: "blur(8px)",
+                        x: -8,
+                        duration: 1,
+                        ease: "expo.inOut"
+                    })
+                    .call(() => {
+                        a.innerHTML = i === 0 ? schoolA : paramsA || schoolA;
+                        b.innerHTML = i === 0 ? schoolB : paramsB || schoolB;
+                    })
+                    .set([a, b], { x: 8 })
+                    .to([a, b], {
+                        opacity: 1,
+                        filter: "blur(0px)",
+                        x: 0,
+                        duration: 1,
+                        ease: "expo.inOut"
+                    });
+            }
+
+            // initial text, no animation
+            (function initText() {
+                const a = document.querySelector("#a");
+                const b = document.querySelector("#b");
+                if (!a || !b) return;
+                a.innerHTML = schoolA;
+                b.innerHTML = schoolB;
+            })();
+
+            setInterval(swap, 12000);
+        });
+    </script>
+
+</body>
+
+</html>

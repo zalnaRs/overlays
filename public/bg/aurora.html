@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Aurora Light Beams</title>
+<style>
+    :root {
+        --bg-color: #04060f;
+        --beam-1: #22d3ee;
+        --beam-2: #a855f7;
+        --beam-3: #6366f1;
+    }
+    * { margin: 0; padding: 0; }
+    body { height: 100vh; background: var(--bg-color); overflow: hidden; }
+    .stage {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+    }
+    .beam {
+        position: absolute;
+        top: -40%;
+        height: 180%;
+        width: 34vw;
+        filter: blur(48px);
+        mix-blend-mode: screen;
+        opacity: 0.55;
+        transform-origin: top center;
+        will-change: transform, opacity;
+    }
+    .beam1 { left: 8%;  background: linear-gradient(to bottom, var(--beam-1), transparent 72%); animation: sway1 11s ease-in-out infinite, pulse 7s ease-in-out infinite; }
+    .beam2 { left: 40%; background: linear-gradient(to bottom, var(--beam-2), transparent 72%); animation: sway2 14s ease-in-out infinite, pulse 9s ease-in-out infinite; }
+    .beam3 { left: 66%; background: linear-gradient(to bottom, var(--beam-3), transparent 72%); animation: sway3 12s ease-in-out infinite, pulse 8s ease-in-out infinite; }
+    @keyframes sway1 { 0%,100% { transform: rotate(-14deg) translateX(0); } 50% { transform: rotate(-4deg) translateX(4vw); } }
+    @keyframes sway2 { 0%,100% { transform: rotate(10deg) translateX(0); } 50% { transform: rotate(2deg) translateX(-4vw); } }
+    @keyframes sway3 { 0%,100% { transform: rotate(-8deg) translateX(0); } 50% { transform: rotate(-18deg) translateX(3vw); } }
+    @keyframes pulse { 0%,100% { opacity: 0.35; } 50% { opacity: 0.7; } }
+    /* Soft floor glow */
+    .floor {
+        position: absolute;
+        bottom: -30%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120vw;
+        height: 60vh;
+        background: radial-gradient(ellipse at center, color-mix(in oklch, var(--beam-3) 40%, transparent), transparent 70%);
+        filter: blur(40px);
+        opacity: 0.4;
+    }
+    .grain {
+        position: absolute;
+        inset: 0;
+        opacity: 0.05;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+        pointer-events: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .beam { animation: none; }
+    }
+</style>
+</head>
+<body>
+    <div class="stage">
+        <div class="beam beam1"></div>
+        <div class="beam beam2"></div>
+        <div class="beam beam3"></div>
+        <div class="floor"></div>
+        <div class="grain"></div>
+    </div>
+</body>
+</html>

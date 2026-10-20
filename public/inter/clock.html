@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="hu">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Szalagavató waiting</title>
+
+    <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+
+<body class="bg-transparent">
+    <main class="fixed right-0 top-0 w-full h-full mx-14 my-8 flex flex-row-reverse gap-1 text-right">
+        <h2 class="text-shadow-lg text-xl mix-blend-screen text-white fade-in-blur text-right" id="clock">
+        </h2>
+    </main>
+
+
+    <script src="/assets/js/main.js" defer></script>
+    <script>
+        setInterval(() => {
+            const clock = document.querySelector("#clock")
+            const now = new Date()
+
+            clock.innerHTML = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}:${now.getSeconds().toString().padStart(2, "0")}`;
+        }, 1000)
+    </script>
+</body>
+
+</html>

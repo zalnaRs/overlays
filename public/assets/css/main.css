@@ -1,12 +1,12 @@
 @import url(/assets/css/fonts.css);
 
 :root {
-  --screen-width: 100%;
-  --screen-height: 100vh;
+    --screen-width: 100%;
+    --screen-height: 100vh;
 
-  --base-font-size: 1rem;
+    --base-font-size: 1rem;
 
-  --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
+    --ease-in-out-expo: cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 /** {
@@ -16,63 +16,125 @@
 }*/
 
 * {
-  overflow: hidden !important;
+    overflow: hidden !important;
 }
 
 html,
 body {
-  width: var(--screen-width);
-  height: var(--screen-height);
-  font-size: var(--base-font-size);
-  color: #000;
-  /* background: rgba(255, 255, 255, 0); */
-  font-family: "Poppins", "Adwaita Sans";
+    width: var(--screen-width);
+    height: var(--screen-height);
+    font-size: var(--base-font-size);
+    color: #000;
+    /* background: rgba(255, 255, 255, 0); */
+    font-family: "Poppins", "Adwaita Sans";
+    visibility: hidden;
+    font-display: block;
 }
 
 h1 {
-  font-weight: 600;
-  font-size: 2rem;
+    font-weight: 600;
+    /* font-size: 2rem; */
 }
 
 .clock {
-  font-family: "Liberation Mono", "Iosevka Web";
-  /* line-height: 15px;*/
+    font-family: "Liberation Mono", "Iosevka Web";
+    /* line-height: 15px;*/
 }
 
 #puskas-title {
-  font-family: "Montserrat";
-  white-space: pre-wrap;
-  display: flex;
-  flex-direction: column;
+    font-family: "Montserrat";
+    white-space: pre-wrap;
+    display: flex;
+    flex-direction: column;
 }
 
 .screen-center {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 @keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fade-out {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+}
+
+/* bg */
+
+#aurora-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.aurora {
+    position: absolute;
     opacity: 0;
-    transform: translateY(-4px);
-  }
+    filter: blur(60px);
+    will-change: transform, opacity;
+    transition: opacity 8s ease-in-out;
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+}
+
+.fade-in-blur {
+    animation: fade-in-blur var(--ease-in-out-expo) 1s;
+    animation-delay: 200ms;
+}
+
+@keyframes fade-in-blur {
+    from {
+        opacity: 0;
+        filter: blur(8px);
+        translate: 8px 0;
+    }
+
+    to {
+        opacity: 1;
+        filter: none;
+    }
+}
+
+.fade-out-blur {
+    animation: fade-out-blur var(--ease-in-out-expo) 1s;
+    animation-delay: 200ms;
+}
+
+@keyframes fade-out-blur {
+    from {
+        opacity: 1;
+        filter: none;
+    }
+
+    to {
+        opacity: 0;
+        filter: blur(8px);
+        translate: -8px 0;
+    }
 }
